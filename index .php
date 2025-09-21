@@ -49,7 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         '8f52803300691cd22ee79fcbb4dda0fea1896805' =>$jobID,
         '962f06eeb8981e7cf3f1c96a5789f2be50c46595' =>$area
 
-        // Кастомные поля (пример)
+
 
     ];
 
@@ -71,8 +71,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Вывод результата
 if (!empty($result['data']['id'])) {
+
+
     $dealId   = $result['data']['id'];
-    $dealLink = "https://{$company_domain}.pipedrive.com/deal/{$dealId}";
+    $dealLink = "https://{$company_domain}.pipedrive.com/deal/{$dealId}"; //ссылка для отображения в окне и в поле Details
 
     // --- Второй запрос: обновляем сделку, добавляем ссылку в кастомное поле ---
     $updateUrl = "https://{$company_domain}.pipedrive.com/api/v1/deals/{$dealId}?api_token={$api_token}";
@@ -81,7 +83,6 @@ if (!empty($result['data']['id'])) {
         'title' => 'Job # '.$dealId,
         '937057ac34e5ee7ea3b5eb4b0403da81fe5db1e7' => $dealLink,
         'e444bb0f4680c9254181b5f570a3ef6670058f58' => $dealId
-       // 'e444bb0f4680c9254181b5f570a3ef6670058f58' =>$number // ← сюда твой ключ кастомного поля
     ];
 
     $ch = curl_init();
